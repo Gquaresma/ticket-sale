@@ -3,7 +3,7 @@ const Orders = require("./controllers/order");
 const Events = require("./controllers/event");
 
 module.exports = http.createServer(async (req, res) => {
-  console.log('got request: ', req.url);
+  console.log("got request: ", req.url);
   switch (req.method) {
     case "GET":
       return handleGetReq(req, res);
@@ -29,7 +29,7 @@ function handleResponse(res, { data, statusCode }) {
 
 // GET
 async function handleGetReq(req, res) {
-  const { pathname, searchParams } = new URL(req.url, "http://localhost:3001/");
+  const { pathname, searchParams } = new URL(req.url, "https://service-1-1.herokuapp.com/");
 
   if (pathname.startsWith("/event")) {
     const eventId = searchParams.get("eventId");
@@ -54,7 +54,7 @@ async function handleGetReq(req, res) {
 
 // POST
 function handlePostReq(req, res) {
-  const { pathname, searchParams } = new URL(req.url, "http://localhost:3001/");
+  const { pathname, searchParams } = new URL(req.url, "https://service-1-1.herokuapp.com/");
 
   if (pathname.startsWith("/event")) {
     let newEvent = [];
@@ -77,7 +77,6 @@ function handlePostReq(req, res) {
       .once("end", async () => {
         newOrder = Buffer.concat(newOrder).toString();
         res.setHeader("Content-Type", "application/json");
-        console.log('got order -> ', newOrder);
         return handleResponse(res, await Orders.createOrder(newOrder, eventId));
       });
   } else {
@@ -87,7 +86,7 @@ function handlePostReq(req, res) {
 
 // DELETE
 async function handleDeleteReq(req, res) {
-  const { pathname, searchParams } = new URL(req.url, "http://localhost:3001/");
+  const { pathname, searchParams } = new URL(req.url, "https://service-1-1.herokuapp.com/");
   if (pathname.startsWith("/event")) {
     const eventId = searchParams.get("eventId");
     res.setHeader("Content-Type", "application/json;charset=utf-8");
@@ -103,7 +102,7 @@ async function handleDeleteReq(req, res) {
 
 // PUT
 function handlePutReq(req, res) {
-  const { pathname, searchParams } = new URL(req.url, "http://localhost:3001/");
+  const { pathname, searchParams } = new URL(req.url, "https://service-1-1.herokuapp.com/");
 
   if (pathname.startsWith("/event")) {
     const eventId = searchParams.get("eventId");
