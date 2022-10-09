@@ -1,5 +1,4 @@
-import Service from "../ticket-system-middleware/src/service";
-import { OnDataFunction } from "./types/onDataFunction";
+import Service from "../middleware/src/service";
 
 const PORT = Number(process.env.PORT) || 7071;
 
@@ -7,6 +6,6 @@ const PORT = Number(process.env.PORT) || 7071;
 Service.create(PORT, "ticketService")
   .then(async (service) => {
     const configApp = await import("./config/app");
-    configApp.default(service.setOnData as OnDataFunction);
+    configApp.default(service);
   })
   .catch(console.error);

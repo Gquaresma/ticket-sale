@@ -1,8 +1,8 @@
 import { Request } from "../../adapters/presentation/controllers/ports/request";
-import { MethodController } from "../ports/method-controller";
+import { Controller } from "../ports/method-controller";
 import { RouteRequest } from "../ports/route-request";
 
-export const adaptRoute = (controller: MethodController) => {
+export const adaptRoute = (controller: Controller) => {
   return (request: RouteRequest) => {
     const requestData: Request = {
       data: request?.data,

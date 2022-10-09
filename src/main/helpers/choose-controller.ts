@@ -1,7 +1,7 @@
 import { makeCreateEventController } from "../factories/event/create-event-data";
-import { MethodController, MethodControllers } from "../ports/method-controller";
+import { Controller, ControllerFactories } from "../ports/method-controller";
 
-function Controllers(path: string): MethodControllers | Error {
+function Controllers(path: string): ControllerFactories | Error {
   const Paths: { [key: string]: any } = {
     event: {
       get: makeCreateEventController,
@@ -24,23 +24,23 @@ function Controllers(path: string): MethodControllers | Error {
 }
 
 function chooseControllerByMethod(
-  controllers: MethodControllers,
+  controllersFactories: ControllerFactories,
   method: string
-): MethodController {
-  const allowedMethods = Object.keys(controllers);
+): Controller {
+  const allowedMethods = Object.keys(controllersFactories);
   if (!allowedMethods.includes(method)) {
     new Error(`Method ${method} not allowed.`);
   }
-  return controllers[method];
+  return controllersFactories[method]();
 }
 
 
-export function getController(path: string, method: string): MethodController | Error {
+export function getController(path: string, method: string): Controller | Error {
     const controllersOrError = Controllers(path);
     if (controllersOrError instanceof Error) {
         return controllersOrError;
     }
-    const controllers: MethodControllers = controllersOrError;
+    const controllers: ControllerFactories = controllersOrError;
     const routeControllerOrError = chooseControllerByMethod(controllers, method);
     return routeControllerOrError;
 }

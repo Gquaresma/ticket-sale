@@ -1,8 +1,6 @@
-import { RouteRequest } from "../ports/route-request";
+import Service from "../../middleware/src/service";
 import setupRoutes from "./routes";
 
-export default function (
-  onData: (onDataFunction: (data: RouteRequest) => any) => void
-) {
-  setupRoutes(onData);
+export default function (service: Service) {
+  setupRoutes(service);
 }
