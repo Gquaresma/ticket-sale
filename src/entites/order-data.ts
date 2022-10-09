@@ -1,6 +1,14 @@
 export interface OrderData {
-  id: string;
   name: string;
   cpf: string;
-  quantity: string;
+  quantity: number;
+}
+
+export const getKeys = () => {
+  const obj: OrderData = {
+    name: "",
+    cpf: "",
+    quantity: 0,
+  }
+  return Object.keys(obj);
 }
