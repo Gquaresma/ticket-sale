@@ -25,7 +25,7 @@ export class Event {
     this.date = date;
   }
 
-  static create(eventData: EventData): Event | Error {
+  static create(eventData: EventData | Event): Event | Error {
     // TODO: create errors like these: (if required)
 
     // const nameOrError: Either<InvalidNameError, Name> = Name.create(userData.name)
@@ -42,7 +42,7 @@ export class Event {
     // const name: Name = nameOrError.value
     // const email: Email = emailOrError.value
 
-    const id = uuid();
+    const id = eventData instanceof Event ? eventData.id : uuid();
     const name = eventData.name;
     const type = eventData.type;
     const local = eventData.local;

@@ -17,7 +17,7 @@ export class CreateEventData implements CreateEvent {
     }
     const event: Event = eventOrError;
 
-    const exists = this.eventRepository.exists(event.name);
+    const exists = this.eventRepository.exists(event.id);
     if (!exists) {
       this.eventRepository.addEvent({
         id: event.id,

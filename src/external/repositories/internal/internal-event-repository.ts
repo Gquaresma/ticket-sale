@@ -1,31 +1,31 @@
-
 import { Event } from "../../../entites/event";
 import { EventRepository } from "../../../useCases/ports/event-repository";
 
 export class InternalEventRepository implements EventRepository {
+  private static _instance: InternalEventRepository;
   events: Event[] = [];
+
   constructor(events: Event[]) {
     this.events = events;
   }
 
-  findAllEvents(): Event[] {
+  public static get instance() {
+      return this._instance || (this._instance = new this([]));
+  }
+
+  getAllEvents(): Event[] {
     return this.events;
   }
 
-  // TODO: Ajustar findEventByName para findEventById
-  findEventByName(name: string): Event | null {
-    let event: Event;
-
-    for (event of this.events) {
-      if (event.name === name) {
-        return event;
-      }
-    }
-    return null;
+  getEventById(id: string): Event | undefined {
+    const event: Event | undefined = this.events.find(
+      (event) => event.id === id
+    );
+    return event;
   }
 
-  exists(name: string): boolean {
-    const exist = this.findEventByName(name);
+  exists(id: string): boolean {
+    const exist = this.getEventById(id);
 
     if (!exist) {
       return false;
@@ -35,23 +35,36 @@ export class InternalEventRepository implements EventRepository {
   }
 
   addEvent(event: Event): void {
-    const exist = this.findEventByName(event.name);
+    const exist = this.getEventById(event.id);
 
     if (!exist) {
       this.events.push(event);
     }
   }
 
-  // TODO: CRIAR UPDATE
+  updateEvent(eventData: Event): Event | undefined {
+    const id = eventData.id;
+    const objectIndex = this.events.findIndex((obj) => obj.id === id);
 
-  removeEvent(id: string): boolean {
+    if (objectIndex < 0) {
+      return undefined;
+    }
+
+    const oldEvent = this.events[objectIndex];
+    this.events[objectIndex] = eventData;
+
+    return oldEvent;
+  }
+
+  removeEvent(id: string): Event | undefined {
     const objectIndex = this.events.findIndex((obj) => obj.id === id);
 
     if (objectIndex >= 0) {
+      const removedEvent = this.events[objectIndex];
       this.events.splice(objectIndex, 1);
-      return true;
+      return removedEvent;
     }
 
-    return false;
+    return undefined;
   }
 }
