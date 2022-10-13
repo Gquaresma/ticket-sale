@@ -1,4 +1,4 @@
-import { Event } from "../../../entites/event";
+import { Event } from "../../../entites/event/event";
 import { EventData } from "../../../entites/event/event-data";
 import { EventRepository } from "../../ports/event-repository";
 import { GetAllEvents } from "./get-all-events";

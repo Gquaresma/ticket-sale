@@ -1,3 +1,3 @@
-import { Order } from "../../../entites/order";
+import { Order } from "../../../entites/order/order";
 
 export type RemoveOrderResponse = Order | Error;

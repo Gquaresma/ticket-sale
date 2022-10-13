@@ -1,4 +1,4 @@
-import { Order } from "../../../entites/order";
+import { Order } from "../../../entites/order/order";
 import { OrderData } from "../../../entites/order/order-data";
 import { OrderRepository } from "../../ports/order-repository";
 import { GetAllOrders } from "./get-all-orders";

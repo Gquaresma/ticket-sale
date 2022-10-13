@@ -1,4 +1,4 @@
-import { Event } from "../../../entites/event";
+import { Event } from "../../../entites/event/event";
 import { EventRepository } from "../../ports/event-repository";
 import { RemoveEvent } from "./remove-event";
 

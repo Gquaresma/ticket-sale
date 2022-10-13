@@ -1,4 +1,4 @@
-import { Order } from "../../entites/order";
+import { Order } from "../../entites/order/order";
 
 export interface OrderRepository {
   getAllOrders: () => Order[];

@@ -1,4 +1,4 @@
-import { Order } from "../../../entites/order";
+import { Order } from "../../../entites/order/order";
 import { OrderRepository } from "../../ports/order-repository";
 import { RemoveOrder } from "./remove-order";
 

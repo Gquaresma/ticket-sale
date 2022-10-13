@@ -1,4 +1,4 @@
-import { Order } from "../../../entites/order";
+import { Order } from "../../../entites/order/order";
 import { UpdateOrderResponse } from "./update-order-response";
 
 export interface UpdateOrder {

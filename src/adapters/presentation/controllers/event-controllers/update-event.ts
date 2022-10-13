@@ -5,7 +5,7 @@ import { getKeys as getEventDataKeys } from "../../../../entites/event/event-dat
 import { badRequest, ok, serverError } from "../helpers/response-helper";
 import { UpdateEvent } from "../../../../useCases/event/update-event-data/update-event";
 import { UpdateEventResponse } from "../../../../useCases/event/update-event-data/update-event-response";
-import { Event } from "../../../../entites/event";
+import { Event } from "../../../../entites/event/event";
 
 function checkDataObjectFields(object: any): string | undefined {
   const props = getEventDataKeys();
