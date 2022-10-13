@@ -3,6 +3,7 @@ export interface EventData {
   type: string;
   local: string;
   ticketPrice: number;
+  ticketQuantity: number;
   date: string;
 }
 
@@ -12,6 +13,7 @@ export const getKeys = () => {
     type: "",
     local: "",
     ticketPrice: 0,
+    ticketQuantity: 0,
     date: ""
   }
   return Object.keys(obj);

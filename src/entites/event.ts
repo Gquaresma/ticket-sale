@@ -7,6 +7,7 @@ export class Event {
   public readonly type: string;
   public readonly local: string;
   public readonly ticketPrice: number;
+  public readonly ticketQuantity: number;
   public readonly date: string;
 
   private constructor(
@@ -15,6 +16,7 @@ export class Event {
     type: string,
     local: string,
     ticketPrice: number,
+    ticketQuantity: number,
     date: string
   ) {
     this.id = id;
@@ -22,6 +24,7 @@ export class Event {
     this.type = type;
     this.local = local;
     this.ticketPrice = ticketPrice;
+    this.ticketQuantity = ticketQuantity;
     this.date = date;
   }
 
@@ -47,8 +50,9 @@ export class Event {
     const type = eventData.type;
     const local = eventData.local;
     const ticketPrice = eventData.ticketPrice;
+    const ticketQuantity = eventData.ticketQuantity;
     const date = eventData.date;
 
-    return new Event(id, name, type, local, ticketPrice, date);
+    return new Event(id, name, type, local, ticketPrice, ticketQuantity, date);
   }
 }
