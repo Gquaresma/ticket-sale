@@ -3,6 +3,11 @@ import { makeGetAllEventsController } from "../factories/event/get-all-events-da
 import { makeGetEventController } from "../factories/event/get-event-data";
 import { makeRemoveEventController } from "../factories/event/remove-event-data";
 import { makeUpdateEventController } from "../factories/event/update-event-data";
+import { makeCreateOrderController } from "../factories/order/create-event-data";
+import { makeGetAllOrdersController } from "../factories/order/get-all-events-data";
+import { makeGetOrderController } from "../factories/order/get-event-data";
+import { makeRemoveOrderController } from "../factories/order/remove-event-data";
+import { makeUpdateOrderController } from "../factories/order/update-event-data";
 import { Controller, ControllerFactories } from "../ports/method-controller";
 
 function Controllers(path: string): ControllerFactories | Error {
@@ -15,12 +20,11 @@ function Controllers(path: string): ControllerFactories | Error {
       delete: makeRemoveEventController,
     },
     order: {
-      // TODO: replace with order factories
-      get: makeCreateEventController,
-      getAll: makeCreateEventController,
-      post: makeCreateEventController,
-      update: makeCreateEventController,
-      delete: makeCreateEventController,
+      get: makeGetOrderController,
+      getAll: makeGetAllOrdersController,
+      post: makeCreateOrderController,
+      update: makeUpdateOrderController,
+      delete: makeRemoveOrderController,
     },
     default: new Error(`Path ${path} does not exist.`),
   };
