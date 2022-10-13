@@ -1,4 +1,4 @@
-import { Order } from "../../../entites/order";
+import { Order } from "../../../entites/order/order";
 import { OrderRepository } from "../../../useCases/ports/order-repository";
 import { InternalEventRepository } from "./internal-event-repository";
 
@@ -43,49 +43,23 @@ export class InternalOrderRepository implements OrderRepository {
     return true;
   }
 
-  addOrder(order: Order): Order | undefined {
-    const exist = this.getOrderById(order.id);
-
-    if (exist) return;
-
-    const eventExists = this.internalEventRepository.exists(order.eventId);
-
-    if (!eventExists) return;
-
+  addOrder(order: Order): Order {
     this.orders.push(order);
     return order;
   }
 
-  updateOrder(order: Order): Order | undefined {
+  updateOrder(order: Order): Order {
     const id = order.id;
     const objectIndex = this.orders.findIndex((obj) => obj.id === id);
-
-    if (objectIndex < 0) {
-      return undefined;
-    }
-
-    const eventExists = this.internalEventRepository.exists(order.eventId);
-
-    if (!eventExists) {
-      // TODO: discuss -> should implement errors for different situations?
-      return undefined;
-    }
-
     const oldOrder = this.orders[objectIndex];
     this.orders[objectIndex] = order;
-
     return oldOrder;
   }
 
-  removeOrder(id: string): Order | undefined {
+  removeOrder(id: string): Order {
     const objectIndex = this.orders.findIndex((obj) => obj.id === id);
-
-    if (objectIndex >= 0) {
-      const removedOrder = this.orders[objectIndex];
-      this.orders.splice(objectIndex, 1);
-      return removedOrder;
-    }
-
-    return undefined;
+    const removedOrder = this.orders[objectIndex];
+    this.orders.splice(objectIndex, 1);
+    return removedOrder;
   }
 }

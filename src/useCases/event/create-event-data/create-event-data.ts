@@ -17,12 +17,13 @@ export class CreateEventData implements CreateEvent {
     }
     const event: Event = eventOrError;
 
-    const newEvent: Event | undefined = this.eventRepository.addEvent(event);
+    const exist = this.eventRepository.exists(event.id);
 
-    if (!newEvent) {
+    if (exist) {
       return new Error(`Event with id ${event.id} already exists.`);
-    }
-  
+    };
+
+    const newEvent: Event = this.eventRepository.addEvent(event);
     return newEvent;
   }
 }

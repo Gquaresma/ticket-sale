@@ -4,7 +4,7 @@ export interface OrderRepository {
   getAllOrders: () => Order[];
   getOrderById: (id: string) => Order | undefined;
   exists: (name: string) => boolean;
-  addOrder: (order: Order) => Order | undefined;
-  removeOrder: (id: string) => Order | undefined;
-  updateOrder: (order: Order) => Order | undefined;
+  addOrder: (order: Order) => Order;
+  removeOrder: (id: string) => Order;
+  updateOrder: (order: Order) => Order;
 }

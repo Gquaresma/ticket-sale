@@ -9,7 +9,10 @@ export class CreateOrderData implements CreateOrder {
   private readonly orderRepository: OrderRepository;
   private readonly eventRepository: EventRepository;
 
-  constructor(orderRepository: OrderRepository, eventRepository: EventRepository) {
+  constructor(
+    orderRepository: OrderRepository,
+    eventRepository: EventRepository
+  ) {
     this.orderRepository = orderRepository;
     this.eventRepository = eventRepository;
   }
@@ -21,24 +24,38 @@ export class CreateOrderData implements CreateOrder {
     }
     const order: Order = orderOrError;
 
-    const newOrder: Order | undefined = this.orderRepository.addOrder(order);
+    const orderExists = this.orderRepository.exists(order.id);
 
-    if (!newOrder) {
+    if (orderExists) {
       return new Error(`Order with id ${order.id} already exists.`);
     }
 
-    const eventOfOrder: Event = this.eventRepository.getEventById(order.eventId) as Event;
+    const eventOfOrderExists = this.eventRepository.exists(order.eventId);
+
+    if (!eventOfOrderExists) {
+      return new Error(
+        `Event of order with id ${order.eventId} does not exists.`
+      );
+    }
+
+    const newOrder: Order = this.orderRepository.addOrder(order);
+
+    const eventOfOrder: Event = this.eventRepository.getEventById(
+      order.eventId
+    ) as Event;
 
     const newTicketQuantity = eventOfOrder.ticketQuantity - newOrder.quantity;
 
-    if ( newTicketQuantity < 0 ) {
-      return new Error(`Event ${eventOfOrder.name} has only ${eventOfOrder.ticketQuantity} tickets.`);
+    if (newTicketQuantity < 0) {
+      return new Error(
+        `Event ${eventOfOrder.name} has only ${eventOfOrder.ticketQuantity} tickets.`
+      );
     }
 
     this.eventRepository.updateEvent({
       ...eventOfOrder,
-      ticketQuantity: newTicketQuantity
-    })
+      ticketQuantity: newTicketQuantity,
+    });
 
     return newOrder;
   }

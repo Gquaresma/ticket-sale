@@ -10,11 +10,13 @@ export class RemoveEventData implements RemoveEvent {
   }
 
   removeEventById(eventId: string): Event | Error {
-    const event: Event | undefined = this.eventRepository.removeEvent(eventId);
-    if ( !event ) {
-      // TODO: make custom error for event not found
-      return new Error(`Event with id ${eventId} not found.`)
+    const eventExists = this.eventRepository.exists(eventId);
+
+    if (!eventExists) {
+      return new Error(`Event with id ${eventId} not found`);
     }
+
+    const event: Event = this.eventRepository.removeEvent(eventId);
     return event;
   }
 }

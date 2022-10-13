@@ -17,11 +17,13 @@ export class UpdateEventData implements UpdateEvent {
     }
     const newEvent: Event = newEventOrError;
 
-    const oldEvent = this.eventRepository.updateEvent(newEvent);
-    if ( !oldEvent ) {
-      // TODO: make custom error
+    const eventExists = this.eventRepository.exists(newEvent.id);
+
+    if (!eventExists) {
       return new Error(`Event with id ${event.id} not found`);
     }
+
+    const oldEvent: Event = this.eventRepository.updateEvent(newEvent);
     return oldEvent;
   }
 }

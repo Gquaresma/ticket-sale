@@ -10,11 +10,13 @@ export class RemoveOrderData implements RemoveOrder {
   }
 
   removeOrderById(orderId: string): Order | Error {
-    const order: Order | undefined = this.orderRepository.removeOrder(orderId);
-    if ( !order ) {
-      // TODO: make custom error for order not found
+    const orderExists = this.orderRepository.exists(orderId);
+
+    if (!orderExists) {
       return new Error(`Order with id ${orderId} not found.`)
     }
+
+    const order: Order  = this.orderRepository.removeOrder(orderId);
     return order;
   }
 }

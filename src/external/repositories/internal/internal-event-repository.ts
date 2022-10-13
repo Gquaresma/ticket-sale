@@ -34,39 +34,23 @@ export class InternalEventRepository implements EventRepository {
     return true;
   }
 
-  addEvent(event: Event): Event | undefined {
-    const exist = this.getEventById(event.id);
-
-    if (exist) return;
-
+  addEvent(event: Event): Event {
     this.events.push(event);
-    
     return event;
   }
 
-  updateEvent(eventData: Event): Event | undefined {
+  updateEvent(eventData: Event): Event {
     const id = eventData.id;
     const objectIndex = this.events.findIndex((obj) => obj.id === id);
-
-    if (objectIndex < 0) {
-      return undefined;
-    }
-
     const oldEvent = this.events[objectIndex];
     this.events[objectIndex] = eventData;
-
     return oldEvent;
   }
 
-  removeEvent(id: string): Event | undefined {
+  removeEvent(id: string): Event {
     const objectIndex = this.events.findIndex((obj) => obj.id === id);
-
-    if (objectIndex >= 0) {
-      const removedEvent = this.events[objectIndex];
-      this.events.splice(objectIndex, 1);
-      return removedEvent;
-    }
-
-    return undefined;
+    const removedEvent = this.events[objectIndex];
+    this.events.splice(objectIndex, 1);
+    return removedEvent;
   }
 }

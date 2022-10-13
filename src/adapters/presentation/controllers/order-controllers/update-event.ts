@@ -4,7 +4,7 @@ import { Response } from "../ports/response";
 import { badRequest, ok, serverError } from "../helpers/response-helper";
 import { getKeys as getOrderDataKeys} from "../../../../entites/order/order-data";
 import { UpdateOrder } from "../../../../useCases/order/update-order-data/update-order";
-import { Order } from "../../../../entites/order";
+import { Order } from "../../../../entites/order/order";
 import { UpdateOrderResponse } from "../../../../useCases/order/update-order-data/update-order-response";
 
 function checkDataObjectFields(object: any): string | undefined {
