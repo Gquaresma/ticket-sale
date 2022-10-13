@@ -10,7 +10,7 @@ export class InternalEventRepository implements EventRepository {
   }
 
   public static get instance() {
-      return this._instance || (this._instance = new this([]));
+    return this._instance || (this._instance = new this([]));
   }
 
   getAllEvents(): Event[] {
@@ -34,12 +34,13 @@ export class InternalEventRepository implements EventRepository {
     return true;
   }
 
-  addEvent(event: Event): void {
+  addEvent(event: Event): Event | undefined {
     const exist = this.getEventById(event.id);
 
-    if (!exist) {
-      this.events.push(event);
-    }
+    if (exist) return;
+
+    this.events.push(event);
+    return event;
   }
 
   updateEvent(eventData: Event): Event | undefined {

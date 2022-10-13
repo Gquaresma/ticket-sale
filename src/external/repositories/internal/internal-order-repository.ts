@@ -49,9 +49,11 @@ export class InternalOrderRepository implements OrderRepository {
     if (exist) return;
 
     const eventExists = this.internalEventRepository.exists(order.eventId);
-    if (eventExists) {
-      this.orders.push(order);
-    }
+
+    if (!eventExists) return;
+
+    this.orders.push(order);
+    return order;
   }
 
   updateOrder(order: Order): Order | undefined {
