@@ -2,7 +2,7 @@ import { MissingParamError } from "../errors/missing-param-error";
 import { Request } from "../ports/request";
 import { Response } from "../ports/response";
 import { badRequest, ok, serverError } from "../helpers/response-helper";
-import { getKeys as getOrderDataKeys} from "../../../../entites/order-data";
+import { getKeys as getOrderDataKeys} from "../../../../entites/order/order-data";
 import { UpdateOrder } from "../../../../useCases/order/update-order-data/update-order";
 import { Order } from "../../../../entites/order";
 import { UpdateOrderResponse } from "../../../../useCases/order/update-order-data/update-order-response";

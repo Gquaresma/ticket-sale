@@ -1,6 +1,6 @@
-import { Event } from "../../../entites/event";
-import { Order } from "../../../entites/order";
-import { OrderData } from "../../../entites/order-data";
+import { Event } from "../../../entites/event/event";
+import { Order } from "../../../entites/order/order";
+import { OrderData } from "../../../entites/order/order-data";
 import { EventRepository } from "../../ports/event-repository";
 import { OrderRepository } from "../../ports/order-repository";
 import { CreateOrder } from "./create-order";

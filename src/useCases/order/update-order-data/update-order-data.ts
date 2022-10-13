@@ -1,5 +1,5 @@
 import { Order } from "../../../entites/order";
-import { OrderData } from "../../../entites/order-data";
+import { OrderData } from "../../../entites/order/order-data";
 import { OrderRepository } from "../../ports/order-repository";
 import { UpdateOrder } from "./update-order";
 

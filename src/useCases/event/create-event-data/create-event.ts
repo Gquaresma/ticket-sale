@@ -1,4 +1,4 @@
-import { EventData } from "../../../entites/event-data";
+import { EventData } from "../../../entites/event/event-data";
 import { CreateEventResponse } from "./create-event-response";
 
 export interface CreateEvent {

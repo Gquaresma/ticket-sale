@@ -1,4 +1,6 @@
 import { v4 as uuid } from "uuid";
+import { InvalidQuantityError } from "../errors/invalid-quantity-error";
+import { Quantity } from "../quantity";
 import { EventData } from "./event-data";
 
 export class Event {
@@ -45,12 +47,20 @@ export class Event {
     // const name: Name = nameOrError.value
     // const email: Email = emailOrError.value
 
+    const quantityOrError: Quantity | Error = Quantity.create(
+      eventData.ticketQuantity
+    );
+
+    if (quantityOrError instanceof Error) {
+      return new InvalidQuantityError(eventData.ticketQuantity);
+    }
+
     const id = eventData instanceof Event ? eventData.id : uuid();
     const name = eventData.name;
     const type = eventData.type;
     const local = eventData.local;
     const ticketPrice = eventData.ticketPrice;
-    const ticketQuantity = eventData.ticketQuantity;
+    const ticketQuantity = (quantityOrError as Quantity).value;
     const date = eventData.date;
 
     return new Event(id, name, type, local, ticketPrice, ticketQuantity, date);

@@ -1,4 +1,4 @@
-import { Event } from "../../../entites/event";
+import { Event } from "../../../entites/event/event";
 import { EventRepository } from "../../../useCases/ports/event-repository";
 
 export class InternalEventRepository implements EventRepository {

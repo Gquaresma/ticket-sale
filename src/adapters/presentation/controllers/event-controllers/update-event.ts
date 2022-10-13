@@ -1,7 +1,7 @@
 import { MissingParamError } from "../errors/missing-param-error";
 import { Request } from "../ports/request";
 import { Response } from "../ports/response";
-import { getKeys as getEventDataKeys } from "../../../../entites/event-data";
+import { getKeys as getEventDataKeys } from "../../../../entites/event/event-data";
 import { badRequest, ok, serverError } from "../helpers/response-helper";
 import { UpdateEvent } from "../../../../useCases/event/update-event-data/update-event";
 import { UpdateEventResponse } from "../../../../useCases/event/update-event-data/update-event-response";

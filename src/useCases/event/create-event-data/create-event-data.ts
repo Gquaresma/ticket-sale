@@ -1,5 +1,5 @@
-import { Event } from "../../../entites/event";
-import { EventData } from "../../../entites/event-data";
+import { Event } from "../../../entites/event/event";
+import { EventData } from "../../../entites/event/event-data";
 import { EventRepository } from "../../ports/event-repository";
 import { CreateEvent } from "./create-event";
 

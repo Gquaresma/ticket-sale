@@ -1,6 +1,7 @@
 import { OrderData } from "./order-data";
-import { Event } from "./event";
 import { v4 as uuid } from "uuid";
+import { Event } from "../event/event";
+import { Quantity } from "../quantity";
 
 export class Order {
   public readonly id: string;
@@ -18,26 +19,16 @@ export class Order {
   }
 
   static create(eventData: OrderData | Order): Order | Error {
-    // TODO: create errors like these: (if required)
+    const quantityOrError: Quantity | Error = Quantity.create(eventData.quantity)
 
-    // const nameOrError: Either<InvalidNameError, Name> = Name.create(userData.name)
-
-    // TODO: validação de todos os atributos
-
-    // if (nameOrError.isLeft()) {
-    //   return left(nameOrError.value)
-    // }
-    // if (emailOrError.isLeft()) {
-    //   return left(emailOrError.value)
-    // }
-
-    // const name: Name = nameOrError.value
-    // const email: Email = emailOrError.value
+    if (quantityOrError instanceof Error) {
+      return quantityOrError;
+    }
 
     const id = eventData instanceof Event ? eventData.id : uuid();
     const name = eventData.name;
     const cpf = eventData.cpf;
-    const quantity = eventData.quantity;
+    const quantity = (quantityOrError as Quantity).value;
     const eventId = eventData.eventId;
 
     return new Order(id, name, cpf, quantity, eventId);

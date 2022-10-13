@@ -3,9 +3,9 @@ import { CreateEvent } from "../../../../useCases/event/create-event-data/create
 import { CreateEventResponse } from "../../../../useCases/event/create-event-data/create-event-response";
 import { Request } from "../ports/request";
 import { Response } from "../ports/response";
-import { EventData, getKeys as getEventDataKeys} from "../../../../entites/event-data";
+import { EventData, getKeys as getEventDataKeys} from "../../../../entites/event/event-data";
 import { badRequest, ok, serverError } from "../helpers/response-helper";
-import { Event } from "../../../../entites/event";
+import { Event } from "../../../../entites/event/event";
 
 function checkDataObjectFields(object: any): string | undefined {
   const props = getEventDataKeys();

@@ -1,4 +1,4 @@
-import { Event } from "../../entites/event";
+import { Event } from "../../entites/event/event";
 
 export interface EventRepository {
   getAllEvents: () => Event[];
