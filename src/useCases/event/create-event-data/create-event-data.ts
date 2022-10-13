@@ -10,7 +10,7 @@ export class CreateEventData implements CreateEvent {
     this.eventRepository = eventRepository;
   }
 
-  createEventData(eventData: EventData): EventData | Error {
+  createEventData(eventData: EventData): Event | Error {
     const eventOrError: Event | Error = Event.create(eventData);
     if (eventOrError instanceof Error) {
       return eventOrError;
@@ -22,6 +22,7 @@ export class CreateEventData implements CreateEvent {
     if (!newEvent) {
       return new Error(`Event with id ${event.id} already exists.`);
     }
+  
     return newEvent;
   }
 }

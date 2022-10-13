@@ -10,7 +10,7 @@ export class CreateOrderData implements CreateOrder {
     this.orderRepository = orderRepository;
   }
 
-  createOrderData(orderData: OrderData): OrderData | Error {
+  createOrderData(orderData: OrderData): Order | Error {
     const orderOrError: Order | Error = Order.create(orderData);
     if (orderOrError instanceof Error) {
       return orderOrError;

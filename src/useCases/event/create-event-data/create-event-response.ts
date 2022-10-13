@@ -1,3 +1,3 @@
-import { EventData } from "../../../entites/event-data";
+import { Event } from "../../../entites/event";
 
-export type CreateEventResponse = EventData | Error;
+export type CreateEventResponse = Event | Error;

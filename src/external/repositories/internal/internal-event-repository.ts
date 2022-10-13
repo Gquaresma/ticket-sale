@@ -40,6 +40,7 @@ export class InternalEventRepository implements EventRepository {
     if (exist) return;
 
     this.events.push(event);
+    
     return event;
   }
 

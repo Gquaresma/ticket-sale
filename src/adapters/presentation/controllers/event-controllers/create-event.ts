@@ -5,6 +5,7 @@ import { Request } from "../ports/request";
 import { Response } from "../ports/response";
 import { EventData, getKeys as getEventDataKeys} from "../../../../entites/event-data";
 import { badRequest, ok, serverError } from "../helpers/response-helper";
+import { Event } from "../../../../entites/event";
 
 function checkDataObjectFields(object: any): string | undefined {
   const props = getEventDataKeys();
@@ -24,7 +25,7 @@ export class CreateEventController {
       const missingField = checkDataObjectFields(requestData.data);
       if (missingField) return new MissingParamError(missingField);
 
-      const eventData = requestData.data as EventData;
+      const eventData = requestData.data as Event;
 
       const createEventResponse: CreateEventResponse =
         this.createEventData.createEventData(eventData);
@@ -32,7 +33,8 @@ export class CreateEventController {
       if (createEventResponse instanceof Error) {
         return badRequest(createEventResponse);
       }
-      return ok(eventData);
+      
+      return ok(createEventResponse);
     } catch (error) {
       return serverError("internal");
     }

@@ -32,7 +32,7 @@ export class CreateOrderController {
       if (createOrderResponse instanceof Error) {
         return badRequest(createOrderResponse);
       }
-      return ok(orderData);
+      return ok(createOrderResponse);
     } catch (error) {
       return serverError("internal");
     }
