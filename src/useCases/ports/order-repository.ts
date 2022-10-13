@@ -1,10 +1,10 @@
 import { Order } from "../../entites/order";
-import { OrderData } from "../../entites/order-data";
 
 export interface OrderRepository {
-  getAllOrders: () => OrderData[];
+  getAllOrders: () => Order[];
   getOrderById: (id: string) => Order | undefined;
   exists: (name: string) => boolean;
-  addOrder: (order: Order) => void;
+  addOrder: (order: Order) => Order | undefined;
   removeOrder: (id: string) => Order | undefined;
+  updateOrder: (order: Order) => Order | undefined;
 }

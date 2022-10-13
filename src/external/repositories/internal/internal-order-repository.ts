@@ -43,7 +43,7 @@ export class InternalOrderRepository implements OrderRepository {
     return true;
   }
 
-  addOrder(order: Order): void {
+  addOrder(order: Order): Order | undefined {
     const exist = this.getOrderById(order.id);
 
     if (exist) return;
