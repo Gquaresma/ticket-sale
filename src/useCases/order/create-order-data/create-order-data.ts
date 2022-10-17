@@ -34,7 +34,7 @@ export class CreateOrderData implements CreateOrder {
 
     if (!eventOfOrderExists) {
       return new Error(
-        `Event of order with id ${order.eventId} does not exists.`
+        `Event of order with id ${order.eventId} does not exist.`
       );
     }
 

@@ -1,6 +1,10 @@
-export class MissingParamError extends Error {
+import { ControllerError } from "./controller-error";
+
+export class MissingParamError extends Error implements ControllerError {
   constructor(paramName: string) {
     super("Missing param: " + paramName);
     this.name = "MissingParamError";
+    this.message = this.message;
+    this.stack = this.stack;
   }
 }

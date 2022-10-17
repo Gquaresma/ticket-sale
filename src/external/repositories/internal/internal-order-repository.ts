@@ -1,24 +1,27 @@
 import { Order } from "../../../entites/order/order";
 import { OrderRepository } from "../../../useCases/ports/order-repository";
-import { InternalEventRepository } from "./internal-event-repository";
+
+const TEST_ORDER = {
+  id: "test",
+  name: "test",
+  cpf: "test",
+  eventId: "test",
+  quantity: 0,
+};
 
 export class InternalOrderRepository implements OrderRepository {
-  private internalEventRepository: InternalEventRepository;
   private static _instance: InternalOrderRepository;
   orders: Order[] = [];
 
   constructor(
-    internalEventRepository: InternalEventRepository,
     orders: Order[]
   ) {
     this.orders = orders;
-    this.internalEventRepository = internalEventRepository;
   }
 
   public static get instance() {
-    const internalEventRepository = InternalEventRepository.instance;
     return (
-      this._instance || (this._instance = new this(internalEventRepository, []))
+      this._instance || (this._instance = new this([TEST_ORDER]))
     );
   }
 

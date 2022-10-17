@@ -1,6 +1,16 @@
 import { Event } from "../../../entites/event/event";
 import { EventRepository } from "../../../useCases/ports/event-repository";
 
+const TEST_EVENT = {
+  id: "test",
+  name: "test",
+  type: "test",
+  local: "test",
+  ticketPrice: 0,
+  ticketQuantity: 0,
+  date: "test",
+};
+
 export class InternalEventRepository implements EventRepository {
   private static _instance: InternalEventRepository;
   events: Event[] = [];
@@ -10,7 +20,7 @@ export class InternalEventRepository implements EventRepository {
   }
 
   public static get instance() {
-    return this._instance || (this._instance = new this([]));
+    return this._instance || (this._instance = new this([TEST_EVENT]));
   }
 
   getAllEvents(): Event[] {
