@@ -9,7 +9,7 @@ import { Event } from "../../../../entites/event/event";
 
 function checkDataObjectFields(object: any): string | undefined {
   const props = getEventDataKeys();
-  const missingField = props.find((prop) => !object[prop]);
+  const missingField = props.find((prop) => !object[prop] && object[prop] !== 0);
   return missingField;
 }
 

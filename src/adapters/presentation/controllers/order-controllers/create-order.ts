@@ -8,7 +8,7 @@ import { CreateOrderResponse } from "../../../../useCases/order/create-order-dat
 
 function checkDataObjectFields(object: any): string | undefined {
   const props = getOrderDataKeys();
-  const missingField = props.find((prop) => !object[prop]);
+  const missingField = props.find((prop) => !object[prop] && object[prop] !== 0);
   return missingField;
 }
 
