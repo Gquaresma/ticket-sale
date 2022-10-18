@@ -9,7 +9,9 @@ import { Event } from "../../../../entites/event/event";
 
 function checkDataObjectFields(object: any): string | undefined {
   const props = getEventDataKeys();
-  const missingField = props.find((prop) => !object[prop] && object[prop] !== 0);
+  const missingField = props.find(
+    (prop) => !object[prop] && object[prop] !== 0
+  );
   return missingField;
 }
 
@@ -23,8 +25,14 @@ export class UpdateEventController {
   handle(requestData: Request): Response | Error {
     try {
       const missingField = checkDataObjectFields(requestData.data);
-      if (missingField) return new MissingParamError(missingField);
-      if (!requestData.data.id) return new MissingParamError("id");
+      if (missingField) {
+        const missingParamError = new MissingParamError(missingField);
+        return badRequest(missingParamError);
+      }
+      if (!requestData.data.id) {
+        const missingParamError = new MissingParamError("id");
+        return badRequest(missingParamError);
+      }
 
       const eventData = requestData.data as Event;
 

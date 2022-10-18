@@ -15,7 +15,10 @@ export class RemoveOrderController {
   handle(requestData: Request): Response | Error {
     try {
       const orderId = requestData.data.id;
-      if (!orderId) return new MissingParamError("id");
+      if (!orderId) {
+        const missingParamError = new MissingParamError("id");
+        return badRequest(missingParamError);
+      }
 
       const removeOrderResponse: RemoveOrderResponse =
         this.removeOrderData.removeOrderById(orderId);

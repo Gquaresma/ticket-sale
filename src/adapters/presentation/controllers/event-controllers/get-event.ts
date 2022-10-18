@@ -15,7 +15,10 @@ export class GetEventController {
   handle(requestData: Request): Response | Error {
     try {
       const eventId = requestData.data.id;
-      if (!eventId) return new MissingParamError("id");
+      if (!eventId) {
+        const missingParamError = new MissingParamError("id");
+        return badRequest(missingParamError);
+      }
 
       const getEventResponse: GetEventResponse =
         this.getEventData.getEventById(eventId);

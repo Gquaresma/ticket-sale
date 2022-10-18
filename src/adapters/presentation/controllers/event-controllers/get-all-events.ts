@@ -10,14 +10,8 @@ export class GetAllEventsController {
     this.getAllEventsData = getAllEventsData;
   }
 
-  handle(/*requestData: Request*/): Response | Error {
+  handle(): Response | Error {
     try {
-    //   const eventId = requestData.data.id;
-    //   if (!eventId) return new MissingParamError("id");
-
-    //   const getEventResponse: GetEventResponse =
-    //     this.getEventData.getEventById(eventId);
-
       const getAllEventsResponse: GetAllEventsResponse =
         this.getAllEventsData.getAllEventsData();
 
