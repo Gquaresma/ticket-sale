@@ -1,3 +1,4 @@
+import { Event } from "../../../entites/event/event";
 import { Order } from "../../../entites/order/order";
 import { OrderData } from "../../../entites/order/order-data";
 import { EventRepository } from "../../ports/event-repository";
@@ -23,17 +24,29 @@ export class UpdateOrderData implements UpdateOrder {
     }
     const newOrder: Order = newOrderOrError;
 
-    const orderExists = this.orderRepository.exists(newOrder.id);
+    const orderToUpdate = this.orderRepository.getOrderById(newOrder.id);
 
-    if (!orderExists) {
+    if (!orderToUpdate) {
       return new Error(`Order with id ${order.id} not found`);
     }
 
-    const eventOfOrderExists = this.eventRepository.exists(newOrder.eventId);
+    const eventOfOrder: Event = this.eventRepository.getEventById(
+      order.eventId
+    ) as Event;
 
-    if (!eventOfOrderExists) {
+    if (!eventOfOrder) {
       return new Error(
         `Event of order with id ${order.eventId} does not exist`
+      );
+    }
+
+    const availableQuantity =
+      eventOfOrder.ticketQuantity + orderToUpdate.quantity;
+    const newTicketQuantity = availableQuantity - order.quantity;
+
+    if (newTicketQuantity < 0) {
+      return new Error(
+        `Event ${eventOfOrder.name} has only ${availableQuantity} ticket(s).`
       );
     }
 

@@ -38,19 +38,19 @@ export class CreateOrderData implements CreateOrder {
       );
     }
 
-    const newOrder: Order = this.orderRepository.addOrder(order);
-
     const eventOfOrder: Event = this.eventRepository.getEventById(
       order.eventId
     ) as Event;
 
-    const newTicketQuantity = eventOfOrder.ticketQuantity - newOrder.quantity;
+    const newTicketQuantity = eventOfOrder.ticketQuantity - order.quantity;
 
     if (newTicketQuantity < 0) {
       return new Error(
-        `Event ${eventOfOrder.name} has only ${eventOfOrder.ticketQuantity} tickets.`
+        `Event ${eventOfOrder.name} has only ${eventOfOrder.ticketQuantity} ticket(s).`
       );
     }
+
+    const newOrder: Order = this.orderRepository.addOrder(order);
 
     this.eventRepository.updateEvent({
       ...eventOfOrder,

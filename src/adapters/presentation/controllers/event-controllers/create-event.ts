@@ -23,7 +23,10 @@ export class CreateEventController {
   handle(requestData: Request): Response | Error {
     try {
       const missingField = checkDataObjectFields(requestData.data);
-      if (missingField) return new MissingParamError(missingField);
+      if (missingField) {
+        const missingParamError = new MissingParamError(missingField);
+        return  badRequest(missingParamError);
+      }
 
       const eventData = requestData.data as Event;
 
