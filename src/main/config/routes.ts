@@ -1,4 +1,5 @@
 import { badRequest } from "../../adapters/presentation/controllers/helpers/response-helper";
+import { SYNC_DATA_METHOD } from "../../middleware/src/config";
 import Service from "../../middleware/src/service";
 import { adaptRoute } from "../adapters/adapter";
 import { getController } from "../helpers/choose-controller";
@@ -11,7 +12,7 @@ export default (service: Service) => {
     const request: RouteRequest = requestObject as RouteRequest;
     const { method, path } = request;
 
-    if (method === "syncData") {
+    if (method === SYNC_DATA_METHOD) {
       return dataSync(request);
     }
 
