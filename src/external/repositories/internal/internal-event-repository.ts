@@ -63,4 +63,8 @@ export class InternalEventRepository implements EventRepository {
     this.events.splice(objectIndex, 1);
     return removedEvent;
   }
+
+  updateDataList(dataList: Event[]): void {
+    this.events = dataList; 
+  }
 }

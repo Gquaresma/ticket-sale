@@ -2,6 +2,7 @@ import { badRequest } from "../../adapters/presentation/controllers/helpers/resp
 import Service from "../../middleware/src/service";
 import { adaptRoute } from "../adapters/adapter";
 import { getController } from "../helpers/choose-controller";
+import { dataSync } from "../helpers/data-sync";
 import { Controller } from "../ports/method-controller";
 import { RouteRequest } from "../ports/route-request";
 
@@ -9,6 +10,10 @@ export default (service: Service) => {
   service.setOnData((requestObject: Object) => {
     const request: RouteRequest = requestObject as RouteRequest;
     const { method, path } = request;
+
+    if (method === "syncData") {
+      return dataSync(request);
+    }
 
     const controllerOrError = getController(path, method);
     if (controllerOrError instanceof Error) {
@@ -19,4 +24,3 @@ export default (service: Service) => {
     return responseHandler(request);
   });
 };
-

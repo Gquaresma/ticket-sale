@@ -65,4 +65,8 @@ export class InternalOrderRepository implements OrderRepository {
     this.orders.splice(objectIndex, 1);
     return removedOrder;
   }
+
+  updateDataList(dataList: Order[]): void {
+    this.orders = dataList; 
+  }
 }
