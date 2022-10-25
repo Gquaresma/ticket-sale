@@ -65,6 +65,10 @@ export class InternalEventRepository implements EventRepository {
   }
 
   updateDataList(dataList: Event[]): void {
-    this.events = dataList; 
+    // updating without changing memory address
+    dataList.forEach((item, index) => {
+      this.events[index] = item;
+    })
+    this.events.splice(dataList.length)
   }
 }

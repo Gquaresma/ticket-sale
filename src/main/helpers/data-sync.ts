@@ -5,12 +5,13 @@ import { RouteRequest } from "../ports/route-request";
 
 export const dataSync = (request: RouteRequest): Response => {
   const { path, data } = request;
+  const dataList = data.dataList;
   switch (path) {
     case "event":
-      InternalEventRepository.instance.updateDataList(data.dataList);
+      InternalEventRepository.instance.updateDataList(dataList);
       break;
     case "order":
-      InternalOrderRepository.instance.updateDataList(data.dataList);
+      InternalOrderRepository.instance.updateDataList(dataList);
       break;
     default:
       break;

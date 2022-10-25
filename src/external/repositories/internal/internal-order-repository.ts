@@ -67,6 +67,10 @@ export class InternalOrderRepository implements OrderRepository {
   }
 
   updateDataList(dataList: Order[]): void {
-    this.orders = dataList; 
+    // updating without changing memory address
+    dataList.forEach((item, index) => {
+      this.orders[index] = item;
+    })
+    this.orders.splice(dataList.length)
   }
 }
